@@ -33,11 +33,15 @@ const User= new mongoose.Schema(
       type: String,
       enum: ['User', 'Admin', 'Doctor'],
       default: 'User'
-    }
+    }, 
+    imagePath:{
+         type: String
+    } 
   },
   {
-    timestamps: true // creates createdAt & updatedAt
+    timestamps: true 
   }
 );
 
 module.exports = mongoose.model('user', User);
+      

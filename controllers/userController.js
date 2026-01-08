@@ -21,7 +21,7 @@ const register = async (req,res)=>{
         const salt = await  bcrypt.genSalt(10)
         password = await bcrypt.hash(req.body.password,salt)
         console.log("hashed password", password)
-        const regUser = await User.create({name, email,password, contactNumber,address,imagePath})
+        await User.create({name, email,password, contactNumber,address,imagePath})
       
         res.status(200).send({msg:"Register successfully", success:true})
         if(existingUser){
