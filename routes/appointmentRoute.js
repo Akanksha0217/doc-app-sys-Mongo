@@ -15,7 +15,7 @@ router.delete('/deleteAppoint/:ID', auth, appointmentController.deleteAppointmen
 
 router.get('/getAppointmentsByUser', auth, appointmentController.getAppointmentsByUser)
 
-// router.get('/showAppointmentsOfDoctor', auth ,doctor, appointmentController.showAppointmentsOfDoctor) 
+
 
 
 

@@ -40,14 +40,14 @@ const docStatus = async (req, res) => {
       });
     }
 
-    // Update doctor status
+  
     const updatedDoc = await Doctor.findByIdAndUpdate(
       DoctorID,
       { status },
       { new: true }
     );
 
-    // If accepted → update user role
+  
     if (status === "Accepted") {
       await User.findByIdAndUpdate(updatedDoc.userID, {
         role: "Doctor",
@@ -59,7 +59,7 @@ const docStatus = async (req, res) => {
       });
     }
 
-    // For Reject / Pending
+  
     return res.status(200).send({
       success: true,
       msg: "Doctor status updated successfully",

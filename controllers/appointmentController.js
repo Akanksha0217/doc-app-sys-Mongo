@@ -47,11 +47,11 @@ async function statusUpdateByDoctor(req, res) {
 
 async function updateAppointment(req, res) {
   try {
-    const { ID } = req.params;   // appointment id
+    const { ID } = req.params;  
     const { dateTime, doctorId } = req.body;
-    const userId = req.user.id;  // logged-in user
+    const userId = req.user.id;  
 
-    // Validate input
+    
     if (!dateTime || !doctorId) {
       return res.status(400).json({
         msg: "dateTime and doctorId are required",
@@ -59,7 +59,7 @@ async function updateAppointment(req, res) {
       });
     }
 
-    // Find appointment by ID
+    
     const appointmentData = await appointment.findById(ID);
 
     if (!appointmentData) {
@@ -69,7 +69,7 @@ async function updateAppointment(req, res) {
       });
     }
 
-    // Check if the user is the creator (authorization)
+  
     if (appointmentData.createdBy.toString() !== userId) {
       return res.status(403).json({
         msg: "Unauthorized",
@@ -77,12 +77,12 @@ async function updateAppointment(req, res) {
       });
     }
 
-    // Update fields
+    
     appointmentData.dateTime = new Date(dateTime);
     appointmentData.doctorId = doctorId;
     appointmentData.updatedBy = userId;
 
-    // Save updated appointment
+    
     await appointmentData.save();
 
     return res.status(200).json({
@@ -115,7 +115,7 @@ if (!appointmentData) {
         success: false,
       });}
 
-   // Check authorization (only creator can delete)
+ 
     if (appointmentData.createdBy.toString() !== userId) {
       return res.status(403).json({
         msg: "Unauthorized",
@@ -123,7 +123,7 @@ if (!appointmentData) {
       });
     }
 
-   // Delete the appointment
+   
     await appointment.findByIdAndDelete(ID);
 
     return res.status(200).json({
@@ -144,7 +144,7 @@ const uId =req.user.id
     if(await appointment.countDocuments({}) == 0){
       res.status(400).send({ msg: "No appointments yet" });
     }
-    // appointments.dateTime = appointments.dateTime
+  
     res.status(200).send({ appointments: appointments, success: true });
   } catch (error) {
     res.status(500).send({ msg: "Server Error" });
@@ -153,7 +153,7 @@ const uId =req.user.id
 
 async function showAppointmentsOfDoctor(req, res) {
   try {
-    // req.userid (docotr id )
+  
 
     const appointments = await appointment.findAll({
       where: { doctorId: req.user.id },

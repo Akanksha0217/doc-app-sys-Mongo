@@ -22,22 +22,22 @@ const doctorSchema = new mongoose.Schema(
       default: 'Pending'
     },
 
-    // Reference to User who created doctor
+    
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     },
 
-    // Reference to User who updated doctor
+    
     updatedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     },
    
     
-  },
+  }, 
   {
-    timestamps: true // creates createdAt & updatedAt
+    timestamps: true 
   }
 );
 

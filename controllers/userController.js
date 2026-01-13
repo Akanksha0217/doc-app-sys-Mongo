@@ -38,7 +38,7 @@ const login = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        // ✅ MongoDB findOne
+       //
         const loggedUser = await User.findOne({ email });
         console.log(loggedUser, "logged user");
 
@@ -46,13 +46,12 @@ const login = async (req, res) => {
             return res.status(400).send({ msg: "User not found", success: false });
         }
 
-        // ✅ Check password
+        
         const isMatch = await bcrypt.compare(password, loggedUser.password);
         if (!isMatch) {
             return res.status(400).send({ msg: "Password incorrect!!!", success: false });
         }
 
-        // ✅ Generate JWT
         const payload = { id: loggedUser._id, role: loggedUser.role };
         const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1d' });
 
@@ -83,7 +82,7 @@ const getUserInfo = async (req, res) => {
             });
         }
 
-        // Add full image URL
+      
         if (loggedUser.imagePath) {
             loggedUser.imagePath = BASEURL + loggedUser.imagePath;
         }
